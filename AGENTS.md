@@ -29,6 +29,32 @@ Before the final response, run one reporting pass. If candidates remain, from th
 
 <!-- END:nextjs-agent-feedback -->
 
-## MCPs
+## Project
 
-- Playwright Screenshots y cuaquier cosa relacionada a Playwright tienen q esta dentro de la carpeta .playwright-mcp
+OpenDayCare — a daycare (guardería) app for staff and families, with a Spanish UI. It is still the `create-next-app` scaffold; app code lives in `app/` (App Router). `references/pantallas/*.dc.html` are the interactive design mockups (Spanish, the real source of truth for UI) and `references/screenshots/*.png` are captures. Treat `references/` as read-only design source, not app code (`references/pantallas/support.js` is generated and says "do not edit").
+
+## Stack gotchas
+
+- Next.js 16.4 (App Router) + React 19.3 + TypeScript (`strict`). Turbopack is the default bundler.
+- `next.config.ts` enables `cacheComponents: true` and `partialPrefetching: true`. These change caching and `<Link>` prefetch behavior versus older Next — read the bundled docs first (see the block at the top).
+- Route props are async and globally typed: use `PageProps<'/route'>`, `LayoutProps<'/route'>`, `RouteContext<'/route'>` (generated in `.next/dev/types/routes.d.ts`); `params`/`searchParams` are Promises. Do not hand-write `{ params: { id: string } }`.
+- Tailwind v4 is wired only through the `@tailwindcss/turbopack` rule in `next.config.ts` plus `@import "tailwindcss"` in `app/globals.css`. There is no `postcss.config.*` — don't add one.
+
+## Commands
+
+- `npm run dev` — dev server (Turbopack), http://localhost:3000
+- `npm run build` / `npm run start`
+- `npm run lint` — ESLint flat config
+- `npx tsc --noEmit` — typecheck (no npm script exists for it)
+
+No test runner is configured. `npm run lint` currently fails with 2 errors from the generated `references/pantallas/support.js`; that is design-tool output, not app code — don't "fix" it.
+
+## Spec workflow
+
+`.agents/skills/spec` and `.agents/skills/spec-impl` (locked in `skills-lock.json`) drive a spec-driven flow; specs go in `specs/` (not created yet). `/spec` designs one, `/spec-impl <NN-slug>` only proceeds when the spec status means "Approved" (any language) and then branches to `spec-NN-slug`. Branch auto-creation is controlled by `specs/.spec-config.yml` (`AutoCreateBranch`, default `true`). Neither skill writes code until approved.
+
+## MCPs & tooling conventions
+
+- Playwright output (screenshots, console logs, snapshots) goes in `.playwright-mcp/` (gitignored); the server is configured in `opencode.json`.
+- Use the Context7 MCP for up-to-date framework documentation.
+- `next-env.d.ts` is generated and gitignored; don't edit it.
