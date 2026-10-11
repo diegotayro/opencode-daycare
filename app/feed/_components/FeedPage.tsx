@@ -1,7 +1,7 @@
-import { ComposeBox } from "./components/ComposeBox";
-import { FeedHeader } from "./components/FeedHeader";
-import { PostCard } from "./components/PostCard";
-import { posts } from "./data/feed-mock";
+import { ComposeBox } from "./ComposeBox";
+import { FeedHeader } from "./FeedHeader";
+import { PostCard } from "./PostCard";
+import { posts } from "../_data/feed-mock";
 
 const composeIcon = (
   <svg

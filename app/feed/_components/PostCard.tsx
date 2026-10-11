@@ -1,5 +1,5 @@
-import type { FeedPost } from "../data/feed-mock";
-import { POST_TYPE_META } from "../data/feed-mock";
+import type { FeedPost } from "../_data/feed-mock";
+import { POST_TYPE_META } from "../_data/feed-mock";
 
 interface PostCardProps {
   post: FeedPost;
