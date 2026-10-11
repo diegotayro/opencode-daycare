@@ -116,19 +116,19 @@ src/
 
 ## Acceptance criteria
 
-- [ ] `npm run dev` levanta sin errores de consola y `/` muestra el feed.
-- [ ] Desktop (≥768px): `/` es idéntico a `references/screenshots/feed.png` (sidebar 248px, header, compose box, 3 posts con badges y contadores, colores y tipografía).
-- [ ] `app/page.tsx` es una ruta fina que solo renderiza `FeedPage` de `src/feed/`.
-- [ ] Los componentes del feed viven en `src/feed/components` y la mock data en `src/feed/data/feed-mock.ts`.
-- [ ] El shell (Sidebar, Main, MobileNav) y `useScrollLock` viven en `src/shared/` y se comparten entre rutas.
-- [ ] Los imports usan el alias `@/*` apuntando a `./src/*`.
-- [ ] Los 3 posts se renderizan desde la mock data usando únicamente `PostCard`.
-- [ ] `ComposeBox` acepta `placeholder`, `avatar` e `icon`; `FeedHeader` acepta `eyebrow`, `title` y `subtitle`.
-- [ ] Móvil (<768px): la sidebar no se muestra; aparece la barra sticky con hamburguesa + marca "OpenDayCare / Sala Soles".
-- [ ] La hamburguesa abre el drawer fullscreen deslizándose de izquierda a derecha con el mismo contenido de la sidebar; el mismo botón lo cierra; con el drawer abierto el fondo no scrollea.
-- [ ] Los enlaces laterales usan `href="#"` y no rompen la navegación.
-- [ ] `npx tsc --noEmit` pasa sin errores y `npm run build` termina OK.
-- [ ] `lang="es"` y título "OpenDayCare" en el layout raíz.
+- [x] `npm run dev` levanta sin errores de consola y `/` muestra el feed. — Verificado: dev server Ready en :3000; consola Playwright 0 errores / 0 warnings; `/` renderiza el feed (`.playwright-mcp/spec01/feed-desktop-viewport.png`, `feed-desktop-full.png`).
+- [ ] Desktop (≥768px): `/` es idéntico a `references/screenshots/feed.png` (sidebar 248px, header, compose box, 3 posts con badges y contadores, colores y tipografía). — Sub-items estructurales verificados (computed styles vs `references/pantallas/feed.dc.html`): sidebar 248px `#FFFDF9`, contenedor 760px (padding `34px 40px 80px`), h1 Fredoka 600 30px `#3F362E`, compose box y 3 `PostCard` con badges LOGRO/ACTIVIDAD/ANUNCIO (hex exactos) y contadores 3/1 · 5/2 · 8/0. **Fidelidad pixel-level vs PNG → revisión visual manual** (`.playwright-mcp/spec01/feed-desktop-full.png`).
+- [x] `app/page.tsx` es una ruta fina que solo renderiza `FeedPage` de `src/feed/`. — Verificado: `app/page.tsx:1-5` (único import `@/feed/FeedPage`, único JSX `<FeedPage />`).
+- [x] Los componentes del feed viven en `src/feed/components` y la mock data en `src/feed/data/feed-mock.ts`. — Verificado: `src/feed/components/{FeedHeader,ComposeBox,PostCard}.tsx` + `src/feed/data/feed-mock.ts`.
+- [x] El shell (Sidebar, Main, MobileNav) y `useScrollLock` viven en `src/shared/` y se comparten entre rutas. — Verificado: `src/shared/components/{Sidebar,Main,MobileNav}.tsx`, `src/shared/hooks/useScrollLock.ts`; `app/layout.tsx:3-5` los importa y `MobileNav` reusa `SidebarContent` (`Sidebar.tsx:101`).
+- [x] Los imports usan el alias `@/*` apuntando a `./src/*`. — Verificado: `tsconfig.json` paths `"@/*": ["./src/*"]`; `app/layout.tsx`/`app/page.tsx` importan `@/shared/...` y `@/feed/...`.
+- [x] Los 3 posts se renderizan desde la mock data usando únicamente `PostCard`. — Verificado: `FeedPage.tsx:47-49` mapea `posts` (3 en `feed-mock.ts:39-83`) a `<PostCard />`; snapshot muestra 3 `<article>`.
+- [x] `ComposeBox` acepta `placeholder`, `avatar` e `icon`; `FeedHeader` acepta `eyebrow`, `title` y `subtitle`. — Verificado: `ComposeBox.tsx:3-7` y `FeedHeader.tsx:1-5`.
+- [x] Móvil (<768px): la sidebar no se muestra; aparece la barra sticky con hamburguesa + marca "OpenDayCare / Sala Soles". — Verificado a 390px: `<aside>` `display:none`; `<header>` `display:flex; position:sticky`, texto "OpenDayCare Sala Soles" + botón hamburguesa (`.playwright-mcp/spec01/feed-mobile.png`).
+- [x] La hamburguesa abre el drawer fullscreen deslizándose de izquierda a derecha con el mismo contenido de la sidebar; el mismo botón lo cierra; con el drawer abierto el fondo no scrollea. — Verificado: drawer `translate` de `-100%` (x=-390) a `0px` (x=0), `SidebarContent` dentro, z drawer 40 < header 50, aria-expanded true/false; `body overflow:hidden` al abrir y `visible` al cerrar; wheel con drawer abierto deja `main.scrollTop`=0 (`.playwright-mcp/spec01/drawer-open.png`).
+- [x] Los enlaces laterales usan `href="#"` y no rompen la navegación. — Verificado: `grep` de `href="#"` en `Sidebar.tsx` (4), `PostCard.tsx` (3) y `ComposeBox.tsx` (1); click en enlaces deja la URL en `/#` con el h1 "Buenas, Caro" y 0 errores de consola.
+- [x] `npx tsc --noEmit` pasa sin errores y `npm run build` termina OK. — Verificado: `npx tsc --noEmit` exit 0; `npm run build` "Compiled successfully", TypeScript OK, 4/4 páginas estáticas generadas.
+- [x] `lang="es"` y título "OpenDayCare" en el layout raíz. — Verificado: `app/layout.tsx:20-23,28` (`metadata.title: "OpenDayCare"`, `<html lang="es">`); `document.title` = "OpenDayCare".
 
 ## Decisions
 
