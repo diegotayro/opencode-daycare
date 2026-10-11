@@ -1,6 +1,6 @@
 # SPEC 01 — Home `/` como feed de OpenDayCare (responsive, screaming architecture)
 
-> **Status:** Approved
+> **Status:** Implemented
 > **Depends on:** (ninguna)
 > **Date:** 2026-10-10
 > **Objective:** Replicar la plantilla `references/pantallas/feed.dc.html` como la ruta `/` de OpenDayCare —sin autenticación ni base de datos— con estilo idéntico al mockup en desktop, versión móvil responsive con menú deslizante, organizado con screaming architecture en `src/`.

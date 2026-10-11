@@ -55,7 +55,11 @@ No test runner is configured. `npm run lint` currently fails with 2 errors from 
 
 ## MCPs & tooling conventions
 
-- Playwright output (screenshots, console logs, snapshots) goes in `.playwright-mcp/` (gitignored); the server is configured in `opencode.json`.
+- Playwright output (screenshots, console logs, snapshots) goes in `.playwright-mcp/` (gitignored); the server is configured in `opencode.json`. Group it by spec and step, mirroring the per-step commits:
+  - One folder per spec: `.playwright-mcp/specNN/` (e.g. `.playwright-mcp/spec01/`).
+  - Inside a spec folder, one subfolder per step/commit that produced output, named after the commit: `.playwright-mcp/specNN/pasoN/` (e.g. `spec01/paso10/`).
+  - If all files were created in the latest step (i.e. only one step has output), skip the `pasoN` subfolder and put them directly in `.playwright-mcp/specNN/`.
+  - Files created before any spec existed stay in the root of `.playwright-mcp/`.
 - Use the Context7 MCP for up-to-date framework documentation.
 - `next-env.d.ts` is generated and gitignored; don't edit it.
 
