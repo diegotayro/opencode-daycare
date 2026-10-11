@@ -53,6 +53,14 @@ No test runner is configured. `npm run lint` currently fails with 2 errors from 
 
 `.agents/skills/spec` and `.agents/skills/spec-impl` (locked in `skills-lock.json`) drive a spec-driven flow; specs go in `specs/` (not created yet). `/spec` designs one, `/spec-impl <NN-slug>` only proceeds when the spec status means "Approved" (any language) and then branches to `spec-NN-slug`. Branch auto-creation is controlled by `specs/.spec-config.yml` (`AutoCreateBranch`, default `true`). Neither skill writes code until approved.
 
+## Spec verification
+
+- `.opencode/agents/spec-verifier.md` (project agent, `mode: all`) verifies a spec's acceptance criteria: static code checks, Next.js conventions (via Context7) and UI/behavior (via the Playwright MCP).
+- It marks the checklist with evidence, fixes code that fails verification, and never changes the spec `Status`.
+- Run it with `/verify-spec <NN-slug>` or select the agent directly.
+- It runs on `opencode/big-pickle` (no vision): pixel-level fidelity against `references/screenshots/*.png` is **not** verified by it — it leaves a "⚠️ Revisión visual manual requerida" block listing the captures to review by hand. Structural comparisons are done against `references/pantallas/*.dc.html` plus computed styles.
+- Evidence artifacts follow the same `.playwright-mcp/specNN/` conventions as the rest of the project.
+
 ## MCPs & tooling conventions
 
 - Playwright output (screenshots, console logs, snapshots) goes in `.playwright-mcp/` (gitignored); the server is configured in `opencode.json`. Group it by spec and step, mirroring the per-step commits:
