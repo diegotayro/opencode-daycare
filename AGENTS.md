@@ -58,3 +58,7 @@ No test runner is configured. `npm run lint` currently fails with 2 errors from 
 - Playwright output (screenshots, console logs, snapshots) goes in `.playwright-mcp/` (gitignored); the server is configured in `opencode.json`.
 - Use the Context7 MCP for up-to-date framework documentation.
 - `next-env.d.ts` is generated and gitignored; don't edit it.
+
+## Reglas de codigo
+
+- Usar codigo limpio, nombres, funciones, variables, etc en ingles.
