@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
+import { Main } from "@/shared/components/Main";
+import { MobileNav } from "@/shared/components/MobileNav";
+import { Sidebar } from "@/shared/components/Sidebar";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -25,7 +28,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <div className="flex min-h-screen h-screen flex-col overflow-hidden bg-[#F6ECDF] md:flex-row">
+          <Sidebar className="hidden md:flex" />
+          <MobileNav />
+          <Main>{children}</Main>
+        </div>
+      </body>
     </html>
   );
 }
