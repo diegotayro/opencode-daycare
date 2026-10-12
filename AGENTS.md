@@ -78,3 +78,4 @@ No test runner is configured. `npm run lint` currently fails with 2 errors from 
 ## Reglas para los modelos de AI
 
 - Siempre respondeme en español.
+- Toda pagina que se haga siempre debe hacerse considerando su version mobile.
