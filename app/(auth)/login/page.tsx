@@ -5,7 +5,7 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-screen flex-col bg-[#FBF4EC] lg:grid lg:grid-cols-[1.05fr_1fr]">
       {/* Left: gradient brand panel */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#F6A98E] via-[#F2937A] to-[#EC7E62] text-white flex flex-col justify-between gap-7 px-6 py-8 sm:px-10 sm:py-10 lg:px-[60px] lg:py-14">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#F6A98E] via-[#F2937A] to-[#EC7E62] text-white flex flex-col justify-between gap-7 px-6 py-6 sm:px-10 lg:px-[60px] lg:py-14">
         {/* Decorative circles (scale down on small screens, never overflow) */}
         <div
           aria-hidden="true"
@@ -25,7 +25,7 @@ export default function LoginPage() {
           </span>
         </div>
 
-        <div className="relative">
+        <div className="relative hidden lg:block">
           <h1 className="font-fredoka font-semibold text-[28px] leading-[1.12] sm:text-[34px] lg:text-[42px]">
             El día de cada niño,
             <br />
