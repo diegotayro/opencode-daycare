@@ -1,85 +1,5 @@
-import type { ReactNode } from "react";
-
-interface NavItem {
-  label: string;
-  active?: boolean;
-  icon: ReactNode;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  {
-    label: "Feed",
-    active: true,
-    icon: (
-      <svg
-        width="19"
-        height="19"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Niños",
-    icon: (
-      <svg
-        width="19"
-        height="19"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="9" cy="7" r="3" />
-        <circle cx="17" cy="9" r="2.4" />
-        <path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 20a5 5 0 0 1 5.5-4.9" />
-      </svg>
-    ),
-  },
-  {
-    label: "Avisos",
-    icon: (
-      <svg
-        width="19"
-        height="19"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0" />
-      </svg>
-    ),
-  },
-  {
-    label: "Mi cuenta",
-    icon: (
-      <svg
-        width="19"
-        height="19"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-    ),
-  },
-];
+import { Button } from "./Button";
+import { SidebarNav } from "./SidebarNav";
 
 interface SidebarProps {
   className?: string;
@@ -125,41 +45,15 @@ export function SidebarContent() {
         </div>
       </a>
 
-      <a
-        href="#"
-        className="flex items-center justify-center gap-2 w-full py-3 rounded-[14px] bg-[linear-gradient(180deg,#F4977E,#EE8164)] text-white font-extrabold text-[14.5px] shadow-[0_8px_18px_-8px_rgba(238,129,100,0.75)] mb-[18px]"
+      <Button
+        variant="primary"
+        icon={<PlusIcon />}
+        className="w-full py-3 mb-[18px]"
       >
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 5v14M5 12h14" />
-        </svg>
         Nueva publicación
-      </a>
+      </Button>
 
-      <nav className="flex flex-col gap-1 flex-1">
-        {NAV_ITEMS.map((item) => (
-          <a
-            key={item.label}
-            href="#"
-            className={`flex items-center gap-3 py-[11px] px-3 rounded-[12px] text-[14.5px] ${
-              item.active
-                ? "bg-[#FBE3D8] text-[#D9583C] font-extrabold"
-                : "text-[#6E6359] font-semibold"
-            }`}
-          >
-            {item.icon}
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      <SidebarNav />
 
       <div className="border-t border-[#ECE0D0] pt-[14px] mt-2.5">
         <div className="flex items-center gap-[11px] px-2 py-1.5">
@@ -191,5 +85,22 @@ export function SidebarContent() {
         </div>
       </div>
     </>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#fff"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
   );
 }

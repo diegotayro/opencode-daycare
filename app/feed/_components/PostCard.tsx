@@ -1,3 +1,4 @@
+import { Avatar } from "@/shared/components/Avatar";
 import type { FeedPost } from "../_data/feed-mock";
 import { POST_TYPE_META } from "../_data/feed-mock";
 
@@ -13,7 +14,15 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <article className="bg-[#FFFDF9] border border-[#ECE0D0] rounded-[20px] py-5 px-[22px] shadow-[0_4px_16px_-12px_rgba(120,90,60,0.5)]">
       <div className="flex items-center gap-3 mb-[14px]">
-        <AuthorAvatar avatar={post.author.avatar} />
+        <Avatar
+          size={44}
+          bg={post.author.avatar.bg}
+          color={post.author.avatar.color}
+          text={post.author.avatar.text}
+          icon={
+            post.author.avatar.icon === "megaphone" ? <MegaphoneIcon /> : undefined
+          }
+        />
         <div className="flex-1 min-w-0">
           <div className="font-fredoka font-semibold text-[16.5px] text-[#3F362E]">
             {post.author.name}
@@ -75,37 +84,20 @@ export function PostCard({ post }: PostCardProps) {
   );
 }
 
-function AuthorAvatar({ avatar }: { avatar: FeedPost["author"]["avatar"] }) {
-  const base =
-    "w-[44px] h-[44px] rounded-full flex items-center justify-center flex-none";
-  if (avatar.icon === "megaphone") {
-    return (
-      <div
-        className={base}
-        style={{ background: avatar.bg, color: avatar.color }}
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="m3 11 18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6" />
-        </svg>
-      </div>
-    );
-  }
+function MegaphoneIcon() {
   return (
-    <div
-      className={`${base} font-fredoka font-semibold text-[17px]`}
-      style={{ background: avatar.bg, color: avatar.color }}
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
-      {avatar.text}
-    </div>
+      <path d="m3 11 18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6" />
+    </svg>
   );
 }
 

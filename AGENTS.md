@@ -74,3 +74,7 @@ No test runner is configured. `npm run lint` currently fails with 2 errors from 
 ## Reglas de codigo
 
 - Usar codigo limpio, nombres, funciones, variables, etc en ingles.
+
+## Reglas para los modelos de AI
+
+- Siempre respondeme en español.

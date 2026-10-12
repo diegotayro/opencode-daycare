@@ -1,6 +1,6 @@
 import { ComposeBox } from "./ComposeBox";
-import { FeedHeader } from "./FeedHeader";
 import { PostCard } from "./PostCard";
+import { PageHeader } from "@/shared/components/PageHeader";
 import { posts } from "../_data/feed-mock";
 
 const composeIcon = (
@@ -24,7 +24,8 @@ const composeIcon = (
 export function FeedPage() {
   return (
     <div className="max-w-[760px] w-full mx-auto pt-[34px] px-5 pb-20 md:px-10">
-      <FeedHeader
+      <PageHeader
+        className="mb-6"
         eyebrow="GUARDERÍA · SALA SOLES"
         title="Buenas, Caro"
         subtitle="12 niños · martes 17 jun"
