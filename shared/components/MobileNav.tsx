@@ -1,17 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { SidebarContent } from "./Sidebar";
 import { useScrollLock } from "../hooks/useScrollLock";
 
 /** Mobile-only sticky top bar with hamburger + brand. The hamburger opens a
  * fullscreen drawer that slides in from the left reusing SidebarContent; the
- * same button closes it (it sits above the drawer in z-index). */
+ * same button closes it (it sits above the drawer in z-index). Navigating
+ * anywhere closes the drawer. */
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   useScrollLock(open);
 
   const toggle = () => setOpen((prev) => !prev);
+
+  // Close the drawer when the route changes (nav links, back button, …).
+  // Render-time state adjustment (the React-sanctioned alternative to
+  // setState inside an effect): React re-renders before committing.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+  }
 
   return (
     <>
